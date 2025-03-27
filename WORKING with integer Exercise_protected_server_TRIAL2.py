@@ -1,3 +1,15 @@
+#import os
+#import json
+#import pickle
+#import joblib
+#import pandas as pd
+#from flask import Flask, jsonify, request
+#from peewee import (
+#    SqliteDatabase, PostgresqlDatabase, Model, IntegerField,
+#    FloatField, TextField, IntegrityError
+#)
+#from playhouse.shortcuts import model_to_dict
+#from playhouse.db_url import connect
 import os
 import json
 import pickle
@@ -5,12 +17,11 @@ import joblib
 import pandas as pd
 from flask import Flask, jsonify, request
 from peewee import (
-    Model, UUIDField, FloatField, TextField,
-    IntegrityError
+    Model, IntegerField, FloatField,
+    TextField, IntegrityError
 )
 from playhouse.shortcuts import model_to_dict
 from playhouse.db_url import connect
-import uuid
 
 ########################################
 # Begin database stuff
@@ -21,7 +32,7 @@ import uuid
 DB = connect(os.environ.get('DATABASE_URL') or 'sqlite:///predictions_exercise.db')
 
 class Prediction(Model):
-    observation_id = UUIDField(default=uuid.uuid4, unique=True) #was observation_id=IntegerField(unique=True) but requests were failing . not being integer
+    observation_id = IntegerField(unique=True)
     observation = TextField()
     proba = FloatField()
     true_class = IntegerField(null=True)
