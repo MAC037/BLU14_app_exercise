@@ -5,7 +5,7 @@ import joblib
 import pandas as pd
 from flask import Flask, jsonify, request
 from peewee import (
-    Model, UUIDField, FloatField, TextField,
+    Model, IntegerField, UUIDField, FloatField, TextField,
     IntegrityError
 )
 from playhouse.shortcuts import model_to_dict
